@@ -109,3 +109,45 @@ void cadastrar(FILE *arquivo) {
 
     printf("Cliente cadastrado com sucesso na posição %d!\n", posicao);
 }
+
+void consultar(FILE *arquivo) {
+    int num_conta;
+    Cliente c;
+
+    printf("Digite o número da conta para consulta: ");
+    scanf("%d", &num_conta);
+
+    rewind(arquivo);
+    while (fread(&c, sizeof(Cliente), 1, arquivo) == 1) {
+        if (c.ativa == 1 && c.numero_conta == num_conta) {
+            printf("\nCliente Encontrado!\n");
+            printf("Conta: %d\nNome: %s\nSaldo: R$ %.2f\n", c.numero_conta, c.nome, c.saldo);
+            return;
+        }
+    }
+    printf("Conta não encontrada ou inativa.\n");
+}
+
+void atualizar(FILE *arquivo) {
+    int num_conta;
+    Cliente c;
+
+    printf("Digite o número da conta para atualizar o saldo: ");
+    scanf("%d", &num_conta);
+
+    rewind(arquivo);
+    while (fread(&c, sizeof(Cliente), 1, arquivo) == 1) {
+        if (c.ativa == 1 && c.numero_conta == num_conta) {
+            printf("Saldo atual: R$ %.2f\n", c.saldo);
+            printf("Digite o novo saldo: R$ ");
+            scanf("%lf", &c.saldo);
+
+            fseek(arquivo, -sizeof(Cliente), SEEK_CUR);
+            fwrite(&c, sizeof(Cliente), 1, arquivo);
+
+            printf("Saldo atualizado com sucesso!\n");
+            return;
+        }
+    }
+    printf("Conta não encontrada.\n");
+}
