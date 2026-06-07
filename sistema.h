@@ -65,11 +65,47 @@ int main() {
                 printf("Encerrando o sistema...\n");
                 break;
             default:
-                printf("Opcao invalida! Tente novamente.\n");
+                printf("Opção inválida! Tente novamente.\n");
         }
     } 
     
     while (opcao != 7);
     fclose(arquivo);
     return 0;
+}
+
+void cadastrar(FILE *arquivo) {
+    int posicao;
+    Cliente c;
+
+    printf("Digite a posição para cadastrar (ex: 1, 2, 3...): ");
+    scanf("%d", &posicao);
+
+    if (posicao < 1) {
+        printf("Posição inválida.\n");
+        return;
+    }
+
+    fseek(arquivo, (posicao - 1) * sizeof(Cliente), SEEK_SET);
+
+    Cliente temp;
+    if (fread(&temp, sizeof(Cliente), 1, arquivo) == 1 && temp.ativa == 1) {
+        printf("Já existe uma conta ativa nesta posição!\n");
+        return;
+    }
+
+    printf("Número da conta: ");
+    scanf("%d", &c.numero_conta);
+    printf("Nome do cliente: ");
+    getchar(); 
+    fgets(c.nome, 50, stdin);
+    c.nome[strcspn(c.nome, "\n")] = 0; 
+    printf("Saldo inicial: R$ ");
+    scanf("%lf", &c.saldo);
+    c.ativa = 1;
+
+    fseek(arquivo, (posicao - 1) * sizeof(Cliente), SEEK_SET);
+    fwrite(&c, sizeof(Cliente), 1, arquivo);
+
+    printf("Cliente cadastrado com sucesso na posição %d!\n", posicao);
 }
