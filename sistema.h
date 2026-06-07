@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-// Estrutura de tamanho fixo para o registro
 typedef struct {
     int numero_conta;
     char nome[50];
@@ -10,9 +9,23 @@ typedef struct {
     int ativa; // 1 = ativa, 0 = excluída/vazia
 } Cliente;
 
-// Protótipos das funções
 void cadastrar(FILE *arquivo);
 void consultar(FILE *arquivo);
 void atualizar(FILE *arquivo);
 void encerrar(FILE *arquivo);
 void listar(FILE *arquivo);
+
+int main() {
+    FILE *arquivo;
+    int opcao;
+
+    // Abre o arquivo binário para leitura e escrita
+    arquivo = fopen("contas.dat", "rb+");
+    if (arquivo == NULL) {
+        // Se não existir, cria um novo arquivo binário
+        arquivo = fopen("contas.dat", "wb+");
+        if (arquivo == NULL) {
+            printf("Erro ao criar o arquivo.\n");
+            return 1;
+        }
+    }
