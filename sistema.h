@@ -151,3 +151,45 @@ void atualizar(FILE *arquivo) {
     }
     printf("Conta não encontrada.\n");
 }
+
+void encerrar(FILE *arquivo) {
+    int num_conta;
+    Cliente c;
+
+    printf("Digite o número da conta para encerrar: ");
+    scanf("%d", &num_conta);
+
+    rewind(arquivo);
+    while (fread(&c, sizeof(Cliente), 1, arquivo) == 1) {
+        if (c.ativa == 1 && c.numero_conta == num_conta) {
+            c.ativa = 0; // Marca como inativo (exclusão lógica)
+
+            fseek(arquivo, -sizeof(Cliente), SEEK_CUR);
+            fwrite(&c, sizeof(Cliente), 1, arquivo);
+
+            printf("Conta encerrada com sucesso.\n");
+            return;
+        }
+    }
+    printf("Conta não encontrada.\n");
+}
+
+void listar(FILE *arquivo) {
+    Cliente c;
+    int encontrou = 0;
+
+    rewind(arquivo);
+    
+    printf("\nLista de Clientes Ativos:\n");
+
+    while (fread(&c, sizeof(Cliente), 1, arquivo) == 1) {
+        if (c.ativa == 1) {
+            printf("Conta: %05d | Nome: %-20s | Saldo: R$ %.2f\n", c.numero_conta, c.nome, c.saldo);
+            encontrou = 1;
+        }
+    }
+
+    if (!encontrou) {
+        printf("Nenhum cliente ativo no sistema.\n");
+    }
+}
