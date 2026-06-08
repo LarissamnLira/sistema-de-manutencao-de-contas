@@ -6,7 +6,7 @@ O projeto foi estruturado de forma modular e segue estritamente os tópicos cons
 
 ---
 
-## 🚀 Funcionalidades Implementadas
+## Funcionalidades Implementadas
 
 O sistema disponibiliza um menu interativo no terminal com as seguintes opções:
 
@@ -20,7 +20,7 @@ O sistema disponibiliza um menu interativo no terminal com as seguintes opções
 
 ---
 
-## 🛠️ Detalhes Técnicos e Estrutura de Dados
+## Detalhes Técnicos e Estrutura de Dados
 
 ### Registro de Tamanho Fixo
 Para possibilitar o acesso direto a posições específicas, foi definida uma estrutura (`struct`) com tamanho predeterminado em memória:
@@ -32,9 +32,9 @@ typedef struct {
     double saldo;
     int ativa; // Flag para Exclusão Lógica (1 = Ativa, 0 = Inativa/Removida)
 } Cliente;
-```c
+```
 
-### 🛠️ Funções de Manipulação de Arquivos
+### Funções de Manipulação de Arquivos
 
 O código implementa de forma prática os requisitos fundamentais de manipulação de arquivos em modo binário (`rb+` / `wb+`):
 
