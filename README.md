@@ -32,6 +32,7 @@ typedef struct {
     double saldo;
     int ativa; // Flag para Exclusão Lógica (1 = Ativa, 0 = Inativa/Removida)
 } Cliente;
+```c
 
 ### 🛠️ Funções de Manipulação de Arquivos
 
