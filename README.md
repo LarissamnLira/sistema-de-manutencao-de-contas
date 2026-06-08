@@ -32,3 +32,12 @@ typedef struct {
     double saldo;
     int ativa; // Flag para Exclusão Lógica (1 = Ativa, 0 = Inativa/Removida)
 } Cliente;
+
+### 🛠️ Funções de Manipulação de Arquivos
+
+O código implementa de forma prática os requisitos fundamentais de manipulação de arquivos em modo binário (`rb+` / `wb+`):
+
+* **`fseek()`**: Utilizado na função `cadastrar` para pular diretamente para a posição desejada (`SEEK_SET`). Também é usado nas funções `atualizar` e `encerrar` com valor negativo (`-sizeof(Cliente)`) a partir da posição atual (`SEEK_CUR`) para voltar o cursor exatamente um registro e sobrescrever a estrutura alterada.
+* **`fread()` e `fwrite()`**: Transferem blocos inteiros da estrutura `Cliente` diretamente entre a memória RAM e o disco de forma rápida, preservando a formatação binária.
+* **`rewind()`**: Reinicia o indicador de posição do arquivo de volta para o início (byte 0). Usado antes das buscas sequenciais e explicitamente na opção 6 do menu.
+* **Exclusão Lógica**: Quando uma conta é "removida", o campo `ativa` passa a ser `0`. O registro permanece fisicamente no arquivo para manter a integridade dos índices de posições, mas é ignorado pelas funções de listagem e consulta.
