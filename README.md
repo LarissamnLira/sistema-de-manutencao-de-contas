@@ -2,11 +2,9 @@
 
 Este projeto consiste em um sistema de gerenciamento e manutenção de contas de clientes desenvolvido em **Linguagem C**. A aplicação utiliza manipulação de arquivos binários com registros de tamanho fixo para garantir uma persistência de dados eficiente, estável e segura, simulando o banco de dados de um sistema bancário.
 
-O projeto foi estruturado de forma modular e segue estritamente os tópicos consolidados de entrada/saída, estruturas de decisão, tipos estruturados (`struct`), subprogramas (funções), arquivos binários e ponteiros.
-
 ---
 
-## Funcionalidades Implementadas
+## Funcionalidades
 
 O sistema disponibiliza um menu interativo no terminal com as seguintes opções:
 
@@ -20,7 +18,7 @@ O sistema disponibiliza um menu interativo no terminal com as seguintes opções
 
 ---
 
-## Detalhes Técnicos e Estrutura de Dados
+## Detalhes Técnicos:
 
 ### Registro de Tamanho Fixo
 Para possibilitar o acesso direto a posições específicas, foi definida uma estrutura (`struct`) com tamanho predeterminado em memória:
@@ -35,7 +33,6 @@ typedef struct {
 ```
 
 ### Funções de Manipulação de Arquivos
-
 O código implementa de forma prática os requisitos fundamentais de manipulação de arquivos em modo binário (`rb+` / `wb+`):
 
 * **`fseek()`**: Utilizado na função `cadastrar` para pular diretamente para a posição desejada (`SEEK_SET`). Também é usado nas funções `atualizar` e `encerrar` com valor negativo (`-sizeof(Cliente)`) a partir da posição atual (`SEEK_CUR`) para voltar o cursor exatamente um registro e sobrescrever a estrutura alterada.
