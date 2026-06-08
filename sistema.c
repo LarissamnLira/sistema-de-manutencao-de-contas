@@ -29,7 +29,7 @@ int main() {
     }
 
     do {
-        printf("< SISTEMA DE MANUTENÇÃO DE CONTAS >\n");
+        printf("\n< SISTEMA DE MANUTENÇÃO DE CONTAS >\n");
         printf("1. Cadastrar um novo cliente em posição específica\n");
         printf("2. Consultar um cliente pelo número da conta\n");
         printf("3. Atualizar o saldo de um cliente\n");
@@ -37,7 +37,7 @@ int main() {
         printf("5. Listar todos os clientes\n");
         printf("6. Restaurar leitura do início (rewind) e listar\n");
         printf("7. Encerrar\n");
-        printf("Escolha uma opção: ");
+        printf("\nEscolha uma opção: ");
         scanf("%d", &opcao);
 
         switch (opcao) {
